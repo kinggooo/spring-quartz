@@ -11,13 +11,14 @@ import org.springframework.stereotype.Component;
 @Component // 此注解必加
 @EnableScheduling // 此注解必加
 public class ScheduleTask {
-    private static final Logger LOGGER =  LoggerFactory.getLogger(ScheduleTask.class);
+    private static final Logger log =  LoggerFactory.getLogger(ScheduleTask.class);
+
     public void sayHello(){
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        LOGGER.info("Hello world, i'm the king of the world!!!");
+        log.info("Hello world, i'm the king of the world!!!");
     }
 }

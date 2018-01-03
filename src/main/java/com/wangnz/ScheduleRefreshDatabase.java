@@ -4,6 +4,8 @@ import org.quartz.CronTrigger;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -12,24 +14,27 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
-//@Configuration
-//@EnableScheduling
-//@Component
+@Configuration
+@EnableScheduling
+@Component
 public class ScheduleRefreshDatabase {
 //    @Autowired
 //    private ConfigRepository repository;
-//
-//    @Resource(name = "jobDetail")
-//    private JobDetail jobDetail;
-//
-//    @Resource(name = "jobTrigger")
-//    private CronTrigger cronTrigger;
-//
-//    @Resource(name = "scheduler")
-//    private Scheduler scheduler;
-//
-//    @Scheduled(fixedRate = 5000) // 每隔5s查库，并根据查询结果决定是否重新设置定时任务
-//    public void scheduleUpdateCronTrigger() throws SchedulerException {
+
+    @Resource(name = "jobDetail")
+    private JobDetail jobDetail;
+
+    @Resource(name = "jobTrigger")
+    private CronTrigger cronTrigger;
+
+    @Resource(name = "scheduler")
+    private Scheduler scheduler;
+
+    private static final Logger log =  LoggerFactory.getLogger(ScheduleRefreshDatabase.class);
+
+    @Scheduled(fixedRate = 5000) // 每隔5s查库，并根据查询结果决定是否重新设置定时任务
+    public void scheduleUpdateCronTrigger() throws SchedulerException {
+        log.info("5秒刷新");
 //        CronTrigger trigger = (CronTrigger) scheduler.getTrigger(cronTrigger.getKey());
 //        String currentCron = trigger.getCronExpression();// 当前Trigger使用的
 //        String searchCron = repository.findOne(1L).getCron();// 从数据库查询出来的
@@ -48,5 +53,5 @@ public class ScheduleRefreshDatabase {
 //            scheduler.rescheduleJob(cronTrigger.getKey(), trigger);
 //            currentCron = searchCron;
 //        }
-//    }
+    }
 }
