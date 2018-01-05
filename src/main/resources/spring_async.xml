@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+    <!-- 等价于 @EnableAsync， executor指定线程池 -->
+    <task:annotation-driven executor="xmlExecutor"/>
+    <!-- id指定线程池产生线程名称的前缀 -->
+    <task:executor
+            id="xmlExecutor"
+            pool-size="5-25"
+            queue-capacity="100"
+            keep-alive="120"
+            rejection-policy="CALLER_RUNS"/>
+</beans>
